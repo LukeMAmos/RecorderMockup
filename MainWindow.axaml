@@ -26,8 +26,8 @@
 
                 <controls:CircularSlider Width = "200"
                                         Height = "200"
-                                        Minimum = "0"
-                                        Maximum = "100"
+                                        Minimum = "-50"
+                                        Maximum = "50"
                                         Value = "50"
                                         Canvas.Left = "20"
                                         Canvas.Top = "354"/>

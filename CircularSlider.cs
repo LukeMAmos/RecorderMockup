@@ -32,11 +32,16 @@ namespace RecorderMockup.Controls
 
             double radius = (Math.Min(width, height)/2.0f) - 2 - dotRadius - 2; //10 here gives us a margin
 
+            //Implementing the move from middle dial controls 
+            double scalingFactor = ((numDots/2)/((Maximum-Minimum)/2)); 
+            int rawDots = Math.Abs((int)(Value * scalingFactor)); 
+            int centreDot = numDots/2; 
+            int otherDot = (Value < 0)? centreDot - rawDots : centreDot + rawDots; 
+
             //Calculating the angle step between dots 
             float angleStep = 2.0f * (float)Math.PI / (float)numDots; 
 
             //for each of the dots, find its dot location and draw a circle at that position 
-
             for(int dot = 0; dot <numDots ; dot++)
             {
                 //get dot location from the angle from step 
@@ -51,13 +56,69 @@ namespace RecorderMockup.Controls
                     dotRadius * 2
                 ));
 
-                context.DrawGeometry(dotColourOn , null , dotGeometry); 
+                IBrush dotColour = dotColourOff; 
+                if(dot >= Math.Min(centreDot , otherDot) && dot <= Math.Max(centreDot, otherDot))
+                {
+                    //If the values are between the centre Dot and other dot then it needs to be on 
+                    dotColour = dotColourOn; 
+                }
+                context.DrawGeometry(dotColour , null , dotGeometry); 
             }
         }
 
+
+        protected override void OnPointerPressed(PointerPressedEventArgs e)
+        {
+            base.OnPointerPressed(e);
+            var properties = e.GetCurrentPoint(this).Properties;
+
+            if (properties.IsLeftButtonPressed)
+            {
+                isDragging = true; 
+                e.Pointer.Capture(this); //Redirects all future mouse presses to this control 
+                lastY = e.GetPosition(this).Y; 
+
+                e.Handled = true; 
+            }
+        }
+
+        protected override void OnPointerMoved(PointerEventArgs e)
+        {
+            base.OnPointerMoved(e);
+            if (isDragging)
+            {
+ 
+                double currentY = e.GetPosition(this).Y; 
+                double changeY = lastY-currentY; 
+                lastY = currentY; 
+
+                double range = Maximum - Minimum; 
+                double valueChange = (changeY / pixelsPerFullRange) * range; 
+                Value = Math.Clamp(Value+ valueChange , Minimum , Maximum); 
+
+                e.Handled = true;
+            }
+        }
+
+        protected override void OnPointerReleased(PointerReleasedEventArgs e)
+        {
+            base.OnPointerReleased(e);
+            if (isDragging)
+            {
+                isDragging = false; 
+                e.Pointer.Capture(null); 
+                e.Handled = true; 
+            }
+        }
+
+
+        bool isDragging = false; 
+        private double lastY;
+        const double pixelsPerFullRange = 150.0; 
         private const float rotaryStartAngle = (float)Math.PI * 0.50f; //start right at bottom 
         private const double dotRadius = 9.0;  
-        private IBrush dotColourOn = new SolidColorBrush(Color.Parse("#D76AFB")); 
+        private IBrush dotColourOn = new SolidColorBrush(Color.Parse("#D76AFB"));
+        private IBrush dotColourOff = new SolidColorBrush(Color.Parse("#2A1A3F")); 
         private IBrush backgroundColour = new SolidColorBrush(Color.Parse("#121212"));
         private const int numDots = 24; 
         private const double cornerRadius = 8.0; 
