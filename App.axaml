@@ -6,5 +6,98 @@
 
     <Application.Styles>
         <FluentTheme />
+
+        <!--Button style implementations-->
+        <Style Selector="Button.record">
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Template"> <!--="Template property allows for drawing inside, to keep the propertys above use the border property around what you want to add"-->
+                    <ControlTemplate>
+                        <Border Name="Bg"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                            <Ellipse Width="52" Height="52" Fill="#D76AFB"/>
+                        </Border>
+                    </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.record:pointerover /template/ Border#Bg">
+            <Setter Property="Background" Value="#D76AFB"/>
+        </Style>
+
+    <Style Selector="Button.back">
+        <Setter Property="Width" Value="170"/>
+        <Setter Property="Height" Value="170"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Name="Bg"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+
+                        <Canvas Width="170" Height="170" Background="{TemplateBinding Background}">
+                            <!-- First Circle -->
+                            <Ellipse Width="40" Height="40" Fill="#D76AFB" 
+                                    Canvas.Left="28" Canvas.Top="65"/>
+                            
+                            <!-- Second Circle -->
+                            <Ellipse Width="40" Height="40" Fill="#D76AFB" 
+                                    Canvas.Left="110" Canvas.Top="25"/>
+                            
+                            <!-- Third Circle -->
+                            <Ellipse Width="40" Height="40" Fill="#D76AFB" 
+                                    Canvas.Left="110" Canvas.Top="105"/>
+                        </Canvas>
+                    </Border>
+                </ControlTemplate>
+        </Setter>
+    </Style>
+
+
+        <Style Selector="Button.forward">
+        <Setter Property="Width" Value="170"/>
+        <Setter Property="Height" Value="170"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Name="Bg"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+
+                        <Canvas Width="170" Height="170" Background="{TemplateBinding Background}">
+                            <!-- First Circle -->
+                            <Ellipse Width="40" Height="40" Fill="#D76AFB" 
+                                    Canvas.Left="20" Canvas.Top="25"/>
+                            
+                            <!-- Second Circle -->
+                            <Ellipse Width="40" Height="40" Fill="#D76AFB" 
+                                    Canvas.Left="105" Canvas.Top="65"/>
+                            
+                            <!-- Third Circle -->
+                            <Ellipse Width="40" Height="40" Fill="#D76AFB" 
+                                    Canvas.Left="20" Canvas.Top="105"/>
+                        </Canvas>
+                    </Border>
+                </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!--Slider/Dial implementation -->
+
+    <Style Selector="Slider.playbackSpeed">
+
+    
+
+    </Style>
     </Application.Styles>
+
+
+
 </Application>
