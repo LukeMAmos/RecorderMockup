@@ -2,6 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="using:RecorderMockup.Controls"
+        xmlns:viewer="using:RecorderMockup.Viewer"
         mc:Ignorable="d" d:DesignWidth="390" d:DesignHeight="844"
         x:Class="RecorderMockup.MainWindow"
         Title="RecorderMockup"
@@ -14,7 +16,7 @@
         <Canvas>
                 <!--Buttons layed out below using canvas to choose the exact position -->
                 <Button Classes="record" Canvas.Left="227" 
-                        Canvas.Top="254"/> 
+                        Canvas.Top="354"/> 
             
                 <Button Classes="back" Canvas.Left="20"
                         Canvas.Top="577"/>
@@ -22,6 +24,19 @@
                 <Button Classes="forward" Canvas.Left="204"
                         Canvas.Top="577"/>
 
+                <controls:CircularSlider Width = "200"
+                                        Height = "200"
+                                        Minimum = "0"
+                                        Maximum = "100"
+                                        Value = "50"
+                                        Canvas.Left = "20"
+                                        Canvas.Top = "354"/>
+
+                <viewer:AudioViewer     x:Name="audioViewer"
+                                        Width = "350"
+                                        Height = "175"
+                                        Canvas.Left = "20"
+                                        Canvas.Top = "85"/>
         </Canvas>
 
 
