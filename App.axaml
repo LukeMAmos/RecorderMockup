@@ -24,7 +24,7 @@
             </Setter>
         </Style>
 
-        <Style Selector="Button.record:pointerover /template/ Border#Bg">
+        <Style Selector="Button.record:pressed /template/ Border#Bg">
             <Setter Property="Background" Value="#D76AFB"/>
         </Style>
 
@@ -40,7 +40,7 @@
                         CornerRadius="{TemplateBinding CornerRadius}"
                         ClipToBounds="True">
 
-                        <Canvas Width="170" Height="170" Background="{TemplateBinding Background}">
+                        <Canvas Width="170" Height="170">
                             <!-- First Circle -->
                             <Ellipse Width="40" Height="40" Fill="#D76AFB" 
                                     Canvas.Left="28" Canvas.Top="65"/>
@@ -58,8 +58,12 @@
         </Setter>
     </Style>
 
+    <Style Selector="Button.back:pressed /template/ Border#Bg">
+        <Setter Property="Background" Value="#D76AFB"/>
+    </Style>
 
-        <Style Selector="Button.forward">
+
+    <Style Selector="Button.forward">
         <Setter Property="Width" Value="170"/>
         <Setter Property="Height" Value="170"/>
         <Setter Property="CornerRadius" Value="8"/>
@@ -71,7 +75,7 @@
                         CornerRadius="{TemplateBinding CornerRadius}"
                         ClipToBounds="True">
 
-                        <Canvas Width="170" Height="170" Background="{TemplateBinding Background}">
+                        <Canvas Width="170" Height="170">
                             <!-- First Circle -->
                             <Ellipse Width="40" Height="40" Fill="#D76AFB" 
                                     Canvas.Left="20" Canvas.Top="25"/>
@@ -87,6 +91,10 @@
                     </Border>
                 </ControlTemplate>
         </Setter>
+    </Style>
+
+    <Style Selector="Button.forward:pressed /template/ Border#Bg">
+        <Setter Property="Background" Value="#D76AFB"/>
     </Style>
 
     <!--Slider/Dial implementation -->
